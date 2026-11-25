@@ -17,7 +17,7 @@ and tells the right person what to do before the patient is in the chair and bef
 ## Run
 Needs Python 3 (tested on 3.13). No database, no build step, no API key.
 ```bash
-git clone <this repo> && cd injection-autopilot
+git clone https://github.com/madhavrajk/Injection-Autopilot.git && cd Injection-Autopilot
 python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt
 python -m app.synth                  # optional: regenerates the seeded synthetic FHIR bundle (already committed)
 python scripts/gate.py               # tests, blind cases, full check: must end with VERDICT: PASS (about 40 s)
