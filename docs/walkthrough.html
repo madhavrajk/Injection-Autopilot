@@ -1,0 +1,286 @@
+<title>Injection Autopilot Walkthrough</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column with a sticky section index on wide screens; screenshots break out wider than the text. */
+:root {
+  --bg: #F2F5F4; --surface: #FFFFFF; --sunken: #E8EEEC; --line: #D9E1DF;
+  --ink: #111A19; --ink-2: #3F4F4C; --ink-3: #647371;
+  --accent: #0C5A66; --accent-soft: #E1EEF0;
+  --clear: #1B6E45; --clear-bg: #E3F1E8; --action: #8F5200; --action-bg: #FAEDD6; --hold: #A02347; --hold-bg: #F8E4EA;
+  --display: "Inter Tight", "Inter", -apple-system, "Segoe UI", sans-serif;
+  --body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0E1313; --surface: #161D1D; --sunken: #1D2626; --line: #2A3535;
+  --ink: #E9EDEB; --ink-2: #B7C1BE; --ink-3: #8B9794;
+  --accent: #6CC5CF; --accent-soft: #15313A;
+  --clear: #6FCF9B; --clear-bg: #143024; --action: #F0B45C; --action-bg: #3A2A10; --hold: #F08CA8; --hold-bg: #3B1823;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0E1313; --surface: #161D1D; --sunken: #1D2626; --line: #2A3535;
+  --ink: #E9EDEB; --ink-2: #B7C1BE; --ink-3: #8B9794;
+  --accent: #6CC5CF; --accent-soft: #15313A;
+  --clear: #6FCF9B; --clear-bg: #143024; --action: #F0B45C; --action-bg: #3A2A10; --hold: #F08CA8; --hold-bg: #3B1823;
+  color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-block: 40px 96px; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 56px; }
+nav.toc { position: sticky; top: calc(24px + env(safe-area-inset-top, 0px)); align-self: start; font-size: 13px; display: grid; gap: 2px; }
+nav.toc b { font: 600 11px/1 var(--body); letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+nav.toc a { color: var(--ink-2); text-decoration: none; padding: 5px 0; display: flex; gap: 10px; }
+nav.toc a span { font-family: var(--mono); color: var(--ink-3); font-size: 12px; }
+nav.toc a:hover { color: var(--accent); }
+main { min-width: 0; display: grid; gap: 56px; }
+header.hero { display: grid; gap: 16px; }
+.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .04em; color: var(--accent); text-transform: uppercase; }
+h1 { font: 700 clamp(34px, 5vw, 52px)/1.04 var(--display); letter-spacing: -.03em; margin: 0; text-wrap: balance; }
+.thesis { font-size: 20px; line-height: 1.5; color: var(--ink-2); max-width: 62ch; margin: 0; }
+.thesis b { color: var(--ink); font-weight: 600; }
+.by { font-size: 13.5px; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.flag { display: inline-block; font-size: 13.5px; background: var(--action-bg); color: var(--action); padding: 8px 12px; border-radius: 8px; max-width: 70ch; }
+section { display: grid; gap: 18px; scroll-margin-top: 24px; }
+h2 { font: 700 26px/1.15 var(--display); letter-spacing: -.02em; margin: 0; text-wrap: balance; }
+h2 small { display: block; font: 500 12px/1 var(--mono); color: var(--ink-3); letter-spacing: .04em; margin-bottom: 10px; }
+h3 { font: 600 16px/1.3 var(--body); margin: 0; }
+p { margin: 0; max-width: 68ch; color: var(--ink-2); }
+p b, li b { color: var(--ink); font-weight: 600; }
+ul { margin: 0; padding-left: 20px; color: var(--ink-2); max-width: 68ch; display: grid; gap: 6px; }
+code { font: 13px var(--mono); background: var(--sunken); padding: 1px 5px; border-radius: 4px; }
+a { color: var(--accent); }
+
+/* the four checkpoints */
+.flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); overflow: hidden; }
+.flow div { padding: 18px 18px 20px; border-left: 1px solid var(--line); display: grid; gap: 6px; align-content: start; }
+.flow div:first-child { border-left: 0; }
+.flow .n { font: 500 12px var(--mono); color: var(--accent); }
+.flow h3 { font-size: 17px; }
+.flow .road { font-size: 12px; color: var(--ink-3); }
+.flow p { font-size: 14px; line-height: 1.45; }
+.flow .who { font-size: 12.5px; color: var(--ink); margin-top: 4px; font-weight: 500; }
+
+/* numbers */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 22px 0; }
+.stats div { display: grid; gap: 4px; align-content: start; }
+.stats b { font: 700 30px/1 var(--display); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.stats span { font-size: 13.5px; color: var(--ink-2); line-height: 1.4; }
+.stats .zero b { color: var(--clear); }
+
+/* tables */
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th { text-align: left; font: 600 11.5px/1.2 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); padding: 12px 14px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-2); line-height: 1.45; }
+tr:last-child td { border-bottom: 0; }
+td:first-child { color: var(--ink); font-weight: 500; }
+.tag { display: inline-block; font: 500 11.5px var(--mono); padding: 1px 7px; border-radius: 5px; white-space: nowrap; }
+.tag.code { background: var(--sunken); color: var(--ink-2); } .tag.model { background: var(--accent-soft); color: var(--accent); } .tag.person { background: var(--action-bg); color: var(--action); }
+.tag.y { background: var(--clear-bg); color: var(--clear); } .tag.p { background: var(--action-bg); color: var(--action); } .tag.n { background: var(--hold-bg); color: var(--hold); }
+
+/* screenshots */
+figure { margin: 0; display: grid; gap: 10px; }
+figure img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 12px; display: block; background: var(--surface); }
+figcaption { font-size: 13.5px; color: var(--ink-3); max-width: 76ch; }
+figcaption b { color: var(--ink-2); }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
+
+.callout { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; display: grid; gap: 10px; }
+.callout h3 { font-size: 15px; }
+ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 14px; max-width: 72ch; }
+ol.steps li { counter-increment: s; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; color: var(--ink-2); }
+ol.steps li::before { content: counter(s); font: 500 13px var(--mono); color: var(--accent); width: 28px; height: 28px; border: 1px solid var(--line); border-radius: 50%; display: grid; place-items: center; background: var(--surface); }
+ol.steps b { display: block; color: var(--ink); }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+footer { font-size: 13px; color: var(--ink-3); border-top: 1px solid var(--line); padding-top: 20px; }
+
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  nav.toc { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  nav.toc b { grid-column: 1 / -1; }
+  .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .flow div:nth-child(3) { border-left: 0; } .flow div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pair, .cols { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 520px) {
+  .flow { grid-template-columns: minmax(0, 1fr); }
+  .flow div { border-left: 0; border-top: 1px solid var(--line); } .flow div:first-child { border-top: 0; }
+  .thesis { font-size: 18px; }
+}
+</style>
+
+<div class="wrap">
+  <nav class="toc" aria-label="Sections">
+    <b>Walkthrough</b>
+    <a href="#why"><span>1</span>Why this problem</a>
+    <a href="#what"><span>2</span>What it does</a>
+    <a href="#tour"><span>3</span>A tour</a>
+    <a href="#decides"><span>4</span>Who decides what</a>
+    <a href="#proof"><span>5</span>How I know it's right</a>
+    <a href="#built"><span>6</span>How it was built</a>
+    <a href="#review"><span>7</span>What reviewers said</a>
+    <a href="#limits"><span>8</span>Limits and next</a>
+    <a href="#ask"><span>9</span>Questions for you</a>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="eyebrow">Prototype for Visentia · technical interview</div>
+      <h1>Injection Autopilot</h1>
+      <p class="thesis">Visentia's roadmap lists a scheduling agent, a care management agent and an RCM agent. In a retina practice all three meet at one thing: <b>the injection visit</b>. This prototype is one engine that follows every anti-VEGF injection through four checkpoints and tells the right person what to do <b>before the patient is in the chair and before the claim goes out</b>.</p>
+      <div class="by"><span>Madhav Rajkondawar</span><span>November 2026</span><span>For the Visentia team</span></div>
+      <div class="flag"><b>Everything here is synthetic.</b> No real patient, payer or claim was used. The four payer policies are ones I wrote for the prototype.</div>
+    </header>
+
+    <section id="why">
+      <h2><small>1 · WHY THIS PROBLEM</small>The seams between your three agents are where a retina practice loses money and patients</h2>
+      <p>I read visentia.ai, then looked at who else is building agents around eye care. Each neighbour owns one checkpoint. Nobody I found joins them at the level a retina practice actually runs on: one eye, one drug, one payer, one date.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>Checkpoint</th><th>Who covers it today</th><th>What is left open</th></tr></thead>
+        <tbody>
+          <tr><td>Scheduling and calls</td><td>Assort Health ($1.2B valuation, already integrated with Nextech), EliseAI</td><td>They book visits. They do not know the earliest date a payer will pay for the same eye</td></tr>
+          <tr><td>Prior authorization</td><td>SamaCare (retina page), GenHealth AI; Cohere on the payer side</td><td>They submit requests. They are not tied to tomorrow's injection schedule or to the claim</td></tr>
+          <tr><td>Drug inventory and buy-and-bill</td><td>McKesson RetinaOS, AllyGPO / BioCareSD</td><td>Comes with a drug-purchasing relationship</td></tr>
+          <tr><td>Claims and denials</td><td>ModMed's planned billing assistant; horizontal RCM vendors</td><td>General ophthalmology. No check of the claim against the injection record</td></tr>
+        </tbody>
+      </table></div>
+      <p>Three facts from the research shaped the design. Sources and my confidence in each are in <code>docs/research.md</code>.</p>
+      <ul>
+        <li><b>The pain is delay, not denial.</b> In a multicenter study of more than 2,200 anti-VEGF authorization requests, about 96% were approved but about 60% were delayed more than 24 hours. So the product looks seven days ahead.</li>
+        <li><b>The practice has already paid for the drug.</b> Almost all anti-VEGF is buy-and-bill. A denied dose is roughly $1,500 (Eylea) to $2,400 (Eylea HD) at Medicare limits.</li>
+        <li><b>Patients drop off.</b> About 22% of wet AMD patients had a gap of a year or more over four years (Obeid 2018). A scheduler can fix that if someone tells them who.</li>
+      </ul>
+      <p>The recommendation that follows for build versus buy: <b>buy the horizontal parts</b> (voice, scribe, payer connectivity) and <b>build the retina logic and the cross-checks</b>, which nobody sells and which a retina surgeon is uniquely placed to get right.</p>
+    </section>
+
+    <section id="what">
+      <h2><small>2 · WHAT IT DOES</small>One engine, four checkpoints, three desks</h2>
+      <div class="flow">
+        <div><span class="n">1</span><h3>Cadence</h3><span class="road">Scheduling agent</span><p>Is every treated eye booked on a safe, payable date? Finds lapsed eyes, visits booked too early to be paid, and visits booked late.</p><span class="who">Scheduler</span></div>
+        <div><span class="n">2</span><h3>Clearance</h3><span class="road">Care management agent</span><p>Is each injection in the next 7 days cleared? Eligibility, authorization, step therapy, interval, and whether the visit matches the order and the note.</p><span class="who">Authorization coordinator</span></div>
+        <div><span class="n">3</span><h3>Claim check</h3><span class="road">RCM agent</span><p>Does the draft claim agree with the chart? Eye modifier, drug code and units, waste modifier, NDC, diagnosis, authorization number.</p><span class="who">Biller</span></div>
+        <div><span class="n">4</span><h3>Denials</h3><span class="road">RCM agent, "denials autopilot"</span><p>What went wrong, and is it a corrected claim or an appeal? Root cause, a drafted letter, and the deadline.</p><span class="who">Biller</span></div>
+      </div>
+      <p>On the synthetic practice (141 patients, 156 treated eyes), this is what it found:</p>
+      <div class="stats">
+        <div><b>21 of 55</b><span>injection visits in the next 7 days need a person before the patient arrives</span></div>
+        <div><b>$37,995</b><span>of drug and fees on those visits</span></div>
+        <div><b>17 of 58</b><span>draft claims did not match the chart</span></div>
+        <div><b>15</b><span>treated eyes are off their schedule</span></div>
+      </div>
+    </section>
+
+    <section id="tour">
+      <h2><small>3 · A TOUR</small>What each person sees</h2>
+      <figure><img src="screens/today.png" alt="Today view: a sentence summarising the week, four checkpoint cards with counts and dollars at risk, a list of items that need a person first, and queues by role" loading="lazy">
+        <figcaption><b>Today, for the owner.</b> One sentence, then the four checkpoints as a pipeline. Below: what needs a person first, who it is waiting on, and where the practice leaks most often.</figcaption></figure>
+      <figure><img src="screens/clearance-drawer.png" alt="Clearance detail: two findings with the records they came from, a drafted authorization request with a passed fact check, and approve, edit and reject buttons" loading="lazy">
+        <figcaption><b>Clearance, for the authorization coordinator.</b> The authorization ended three days before the visit and step therapy is not met. Each finding shows the record and field it read. The renewal is drafted; nothing leaves the practice until a person approves.</figcaption></figure>
+      <div class="pair">
+        <figure><img src="screens/hold-drawer.png" alt="An item on hold: the clinic note says Vabysmo and the order says Eylea; no fix is proposed" loading="lazy">
+          <figcaption><b>A hold.</b> The note says Vabysmo, the order says Eylea. The agent proposes no fix: choosing between two clinical records is the physician's decision.</figcaption></figure>
+        <figure><img src="screens/cadence-drawer.png" alt="Cadence detail with a timeline showing the last injection, a hatched zone that is too soon to be paid, the booked date inside it, the proposed date, and the due date" loading="lazy">
+          <figcaption><b>Cadence, for the scheduler.</b> Booked 21 days after the last injection; this payer pays at 28. The hatched zone is too soon to be paid, the green zone is on time.</figcaption></figure>
+      </div>
+      <div class="pair">
+        <figure><img src="screens/claim-drawer.png" alt="Claim check detail: a table of what the claim says and what the chart supports, and the draft claim lines with the affected lines highlighted" loading="lazy">
+          <figcaption><b>Claim check, for the biller.</b> Claim says, chart supports. The agent never edits a claim; the biller approves the correction.</figcaption></figure>
+        <figure><img src="screens/denial-drawer.png" alt="Denial detail: reason code, root cause and a drafted appeal letter" loading="lazy">
+          <figcaption><b>Denials.</b> Reason code, root cause, the appeal drafted from the record, and the deadline.</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="decides">
+      <h2><small>4 · WHO DECIDES WHAT</small>Code checks, a model handles language, a person approves</h2>
+      <p>The worst failure in this domain is a wrong eye, drug, dose, date or authorization number. So no model ever writes one.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>Step</th><th>Who</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Intervals, authorization windows, units, modifiers, eligibility</td><td><span class="tag code">code</span></td><td>A date subtraction is right every time and costs nothing</td></tr>
+          <tr><td>Reading the plan sentence in the clinic note</td><td><span class="tag model">model</span></td><td>Fuzzy language. Patient identifiers are removed first, and code compares what it read with the structured order</td></tr>
+          <tr><td>Wording of authorization requests, appeals and patient texts</td><td><span class="tag model">model</span></td><td>It writes a template. Its prompt holds the letter type and the fact names only, so no PHI goes to a model for drafting. Code fills every fact, and a draft with a digit, drug or eye outside a placeholder cannot be approved</td></tr>
+          <tr><td>Two records that disagree</td><td><span class="tag person">person</span></td><td>The item goes on hold and the agent proposes nothing</td></tr>
+          <tr><td>Anything that leaves the practice</td><td><span class="tag person">person</span></td><td>Approve, edit or reject. Recorded with role and note; every decision is kept</td></tr>
+        </tbody>
+      </table></div>
+      <p>With no API key in this environment, the two model steps ran on a deterministic stand-in, so the whole build cost $0 at run time. The pipeline, the redaction and the fact checks around those steps are the real ones. The live path exists behind a budget guard and has not yet been run against a live model.</p>
+    </section>
+
+    <section id="proof">
+      <h2><small>5 · HOW I KNOW IT'S RIGHT</small>Four independent checks, on everything rather than a sample</h2>
+      <div class="stats">
+        <div class="zero"><b>52 / 52</b><span><b>Blind cases.</b> Written from the spec alone, without the code. Zero wrong clears, zero false alarms on 18 near misses</span></div>
+        <div class="zero"><b>287 / 287</b><span><b>Answer key.</b> The data generator recorded the 71 defects it planted. Every item matches</span></div>
+        <div class="zero"><b>0</b><span><b>Second source.</b> A separate reader parses the raw FHIR bundle and compares 16,092 fields with what the app loaded</span></div>
+        <div class="zero"><b>0</b><span><b>Leaks.</b> 1,127 patient identifiers searched for in every prompt and every log line</span></div>
+      </div>
+      <div class="callout">
+        <h3>What the full check caught that the tests had missed</h3>
+        <p>One finding cited <code>productOrService = "none"</code> as its evidence: a value that exists in no record. The 210 unit tests and the 52 blind cases had all passed. The check that traces every evidence row back to the raw bundle failed on that one row out of 1,581. It became a test, then a fix. That is why the check covers every record, not a sample.</p>
+      </div>
+      <p>The check also has teeth. Five fault injections run with the tests: flip one eye in the bundle, corrupt one evidence row, put a patient name in a prompt, and edit the answer key both ways. Each one is caught.</p>
+    </section>
+
+    <section id="built">
+      <h2><small>6 · HOW IT WAS BUILT</small>Spec first, checks independent of the code</h2>
+      <ol class="steps">
+        <li><div><b>Scout and understand</b>Research on Visentia and the market; billing rules from AAO, ASRS, CMS and Retina Today, each tagged with how sure I am. Seven design questions, with the answer I assumed and the decision it caused.</div></li>
+        <li><div><b>Contracts and spec first</b>Data shapes and a rule table with an id for every rule, committed before any logic.</div></li>
+        <li><div><b>One visit end to end</b>Synthetic FHIR data and ingest, the rules and the model layer, built against the contracts, then the orchestrator, the API and the interface.</div></li>
+        <li><div><b>Independent checks</b>Labelled cases written from the spec alone, and a verifier that reads the raw bundle without reusing the ingest code.</div></li>
+        <li><div><b>Interface, then review</b>A design review and a review against the pass/fail criteria, once each, at the end. Decisions were logged as I went.</div></li>
+      </ol>
+    </section>
+
+    <section id="review">
+      <h2><small>7 · WHAT REVIEWERS SAID</small>One design review and one expert panel</h2>
+      <p>Both reviews were done independently of the build. I asked for scores and the smallest fixes, ran one round of fixes, and stopped. The scores below are the ones they gave <b>before</b> that round.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>Reviewer</th><th>Score</th><th>What they said</th><th>What I did</th></tr></thead>
+        <tbody>
+          <tr><td>Designer: owner's 10-second read</td><td>7 / 10</td><td>The "needs a person first" list showed holds from next week above today's uncleared visits</td><td><span class="tag y">fixed</span> Soonest injection visit first</td></tr>
+          <tr><td>Designer: coordinator's queue</td><td>6 / 10</td><td>Clipped column, 24-hour times, three names for one state, draft letter scrolling inside its box</td><td><span class="tag y">fixed</span> All four</td></tr>
+          <tr><td>Designer: trust and explainability</td><td>8 / 10</td><td>Evidence chips, "no fix proposed" and the claim diff are distinctive: do not touch</td><td>Left alone</td></tr>
+          <tr><td>Designer: visual craft and accessibility</td><td>7 and 6 / 10</td><td>Muted text at 4.1 to 4.4 contrast; input borders at 1.6</td><td><span class="tag y">fixed</span> Now 5.0 and 3.3</td></tr>
+          <tr><td>Panel: retina biller</td><td>6 / 10</td><td>Units, laterality codes and reason codes are right. Appeal windows were 180 days for every payer; step therapy has no established-patient exemption; the waste-modifier fix always proposed JZ</td><td><span class="tag y">fixed</span> Per-payer windows and the modifier wording. <span class="tag p">open</span> Step-therapy exemption</td></tr>
+          <tr><td>Panel: data engineer and HIPAA reviewer</td><td>6 / 10</td><td>Prompts carry fact names only, which is good. But masking is not access control: the role comes from the request</td><td><span class="tag y">fixed</span> No role now means no names. <span class="tag p">open</span> Real sign-in</td></tr>
+          <tr><td>Panel: product lead</td><td>7 / 10</td><td>A sharp wedge, but the proof is self-generated: the same build wrote the data and the answer key</td><td><span class="tag p">open</span> Replay on a design partner's de-identified claims and remits</td></tr>
+        </tbody>
+      </table></div>
+      <p>The panel ran all ten pass/fail criteria that were written before the build. <b>Ten of ten passed, with no blockers.</b> The product lead's point is the one I agree with most: every number on this page is measured against data I generated. The next proof has to come from a real practice.</p>
+    </section>
+
+    <section id="limits">
+      <h2><small>8 · LIMITS AND NEXT</small>What this is not, yet</h2>
+      <div class="cols">
+        <div class="callout"><h3>Limits</h3><ul>
+          <li>Synthetic data. The notes follow a known grammar, so the note reader looks better here than it would on real dictation.</li>
+          <li>Billing rules follow public sources with mixed confidence. Some are marked "assumed" in <code>docs/domain_recon.md</code>.</li>
+          <li>The model steps ran on a stand-in. The live path is untested.</li>
+          <li>"Approve" records a decision. It does not submit to a payer, move an appointment or edit a claim.</li>
+          <li>No sign-in. The role switch is a demo control.</li>
+        </ul></div>
+        <div class="callout"><h3>Next, in order</h3><ul>
+          <li>Connect one real source, read-only: ModMed or Nextech appointments and procedures.</li>
+          <li>Test the note reader on de-identified notes labelled by a clinician.</li>
+          <li>Eligibility and authorization status from a clearinghouse.</li>
+          <li>Drug inventory: is the vial for tomorrow's cleared injections on the shelf.</li>
+          <li>A morning summary where staff already work, and the patient text from the outreach draft.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section id="ask">
+      <h2><small>9 · QUESTIONS FOR YOU</small>Where my assumptions are most likely wrong</h2>
+      <ul>
+        <li>Which EHR and practice-management system do your partner practices run?</li>
+        <li>Where does prior authorization hurt most: the first request, renewals, or step-therapy exceptions?</li>
+        <li>Is the treat-and-extend interval a structured order in your charts, or only in the note? If only in the note, the model step becomes the primary source and needs a much larger test set.</li>
+        <li>For same-day bilateral injections, do your payers want RT and LT on two lines or modifier 50? I did not guess.</li>
+        <li>Which of the checks in this prototype would your billers call wrong?</li>
+      </ul>
+    </section>
+
+    <footer>Code, tests and documents: <code>~/Downloads/Visentia/injection-autopilot</code>. Run <code>python scripts/gate.py</code>, then <code>uvicorn app.api:app --port 8765</code>.</footer>
+  </main>
+</div>

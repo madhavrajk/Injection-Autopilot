@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Injection Autopilot</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#view">Skip to content</a>
+<div class="app">
+  <aside class="rail" aria-label="Sections">
+    <div class="brand">
+      <svg viewBox="0 0 28 28" width="28" height="28" aria-hidden="true">
+        <circle cx="14" cy="14" r="12.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="14" cy="14" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="14" cy="14" r="2.4" fill="currentColor"/>
+      </svg>
+      <div><b>Injection Autopilot</b><span>Prototype for Visentia</span></div>
+    </div>
+    <nav id="nav"></nav>
+    <div class="rail-foot">
+      <p><b>Synthetic data.</b> No real patient or payer. Payer policies are illustrative.</p>
+      <p id="mode"></p>
+    </div>
+  </aside>
+  <main>
+    <header class="top">
+      <div>
+        <h1 id="title"></h1>
+        <p id="sub"></p>
+      </div>
+      <div class="top-right">
+        <span class="chip" id="asof"></span>
+        <label class="role">Viewing as
+          <select id="role" aria-label="Role">
+            <option value="owner">Practice owner</option>
+            <option value="auth_coordinator">Authorization coordinator</option>
+            <option value="scheduler">Scheduler</option>
+            <option value="biller">Biller</option>
+            <option value="physician">Physician</option>
+            <option value="compliance">Compliance (no names)</option>
+          </select>
+        </label>
+      </div>
+    </header>
+    <section id="view" tabindex="-1" aria-live="polite"></section>
+  </main>
+</div>
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="d-title" hidden></aside>
+<div class="toast" id="toast" role="status" hidden></div>
+<script src="/app.js"></script>
+</body>
+</html>

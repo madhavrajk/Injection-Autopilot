@@ -1,0 +1,5740 @@
+{
+ "cases": [
+  {
+   "id": "cad-appt-exactly-28-days-after-last",
+   "stage": "cadence",
+   "subject_id": "plan-OD",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 4,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-21",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-18",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "Last 10-21, appt 11-18 is 28 days, not < min 28; due 11-18 equals appt so on time."
+  },
+  {
+   "id": "cad-appt-27-days-after-last",
+   "stage": "cadence",
+   "subject_id": "plan-OD",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 4,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-22",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-18",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-03"
+   ],
+   "why": "Last 10-22, appt 11-18 is 27 days < 28: CAD-03 reschedule to 11-19."
+  },
+  {
+   "id": "cad-appt-due-plus-7-on-time",
+   "stage": "cadence",
+   "subject_id": "plan-OD",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-01",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-12-03",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "Due 11-26; appt 12-03 = due+7, not > due+7, so on time; gap 63 days."
+  },
+  {
+   "id": "cad-appt-due-plus-8-late",
+   "stage": "cadence",
+   "subject_id": "plan-OD",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-01",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-12-04",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-04"
+   ],
+   "why": "Due 11-26; appt 12-04 = due+8 > due+7: CAD-04 reschedule."
+  },
+  {
+   "id": "cad-no-appt-overdue-14-days",
+   "stage": "cadence",
+   "subject_id": "plan-OD",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-09-09",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-02"
+   ],
+   "why": "Due 11-04; as_of 11-18 is due+14, not > due+14 so not lapsed; due within horizon, nothing booked: CAD-02 book."
+  },
+  {
+   "id": "cad-no-appt-overdue-15-days-lapsed",
+   "stage": "cadence",
+   "subject_id": "plan-OD",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-09-08",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-05"
+   ],
+   "why": "Due 11-03; as_of is due+15 > due+14 with nothing booked: CAD-05 outreach."
+  },
+  {
+   "id": "cad-no-appt-due-as-of-plus-14",
+   "stage": "cadence",
+   "subject_id": "plan-OD",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-07",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-02"
+   ],
+   "why": "Due 12-02 = as_of+14, within horizon, nothing booked: CAD-02 book."
+  },
+  {
+   "id": "cad-no-appt-due-as-of-plus-15",
+   "stage": "cadence",
+   "subject_id": "plan-OD",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-08",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "Due 12-03 = as_of+15, outside the 14-day horizon, nothing booked: CAD-01 pass."
+  },
+  {
+   "id": "cad-appt-early-but-legal",
+   "stage": "cadence",
+   "subject_id": "plan-OD",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-01",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-19",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "Due 11-26; appt 11-19 is a week early, gap 49 days >= 28; early is not flagged by any rule."
+  },
+  {
+   "id": "clr-auth-ends-on-visit-day",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": "2026-11-20"
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-harbor",
+      "name": "Harbor Advantage HMO",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "C9257",
+      "bevacizumab_units": 5
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "auth_number": "AUTH-1",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OD"
+      ],
+      "status": "approved",
+      "valid_from": "2026-01-01",
+      "valid_to": "2026-11-20",
+      "injections_approved": 12,
+      "injections_used": 3,
+      "step_therapy_exception": false,
+      "requested_on": null
+     }
+    ],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "Auth valid_to = visit date 11-20 still contains dos (inclusive), coverage also ends that day, 3/12 used; CLR-09 is only a NOTE."
+  },
+  {
+   "id": "clr-auth-ended-day-before",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-harbor",
+      "name": "Harbor Advantage HMO",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "C9257",
+      "bevacizumab_units": 5
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "auth_number": "AUTH-1",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OD"
+      ],
+      "status": "approved",
+      "valid_from": "2026-01-01",
+      "valid_to": "2026-11-19",
+      "injections_approved": 12,
+      "injections_used": 2,
+      "step_therapy_exception": false,
+      "requested_on": null
+     }
+    ],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-06"
+   ],
+   "why": "Approved auth for drug and eye ended 11-19, day before dos 11-20: CLR-06 renew."
+  },
+  {
+   "id": "clr-pending-beats-expired-auth",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-harbor",
+      "name": "Harbor Advantage HMO",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "C9257",
+      "bevacizumab_units": 5
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "auth_number": "AUTH-1",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OD"
+      ],
+      "status": "approved",
+      "valid_from": "2026-01-01",
+      "valid_to": "2026-10-31",
+      "injections_approved": 12,
+      "injections_used": 2,
+      "step_therapy_exception": false,
+      "requested_on": null
+     },
+     {
+      "id": "a2",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "auth_number": "AUTH-2",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OD"
+      ],
+      "status": "pending",
+      "valid_from": null,
+      "valid_to": null,
+      "injections_approved": null,
+      "injections_used": 0,
+      "step_therapy_exception": false,
+      "requested_on": "2026-11-15"
+     }
+    ],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-08"
+   ],
+   "why": "No covering auth; a pending auth for drug and eye exists and ranks above the expired approved one: CLR-08 expedite."
+  },
+  {
+   "id": "clr-auth-injections-exhausted",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-harbor",
+      "name": "Harbor Advantage HMO",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "C9257",
+      "bevacizumab_units": 5
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "auth_number": "AUTH-1",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OD"
+      ],
+      "status": "approved",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-06-30",
+      "injections_approved": 6,
+      "injections_used": 6,
+      "step_therapy_exception": false,
+      "requested_on": null
+     }
+    ],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-07"
+   ],
+   "why": "Approved, window contains dos, but 6 of 6 injections used: CLR-07 renew."
+  },
+  {
+   "id": "clr-auth-other-eye-and-other-payer",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-harbor",
+      "name": "Harbor Advantage HMO",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "C9257",
+      "bevacizumab_units": 5
+     },
+     {
+      "payer_id": "ma-summit",
+      "name": "Summit Medicare Advantage",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": {
+       "first_line": "bevacizumab",
+       "min_doses": 3
+      },
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "auth_number": "AUTH-1",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OS"
+      ],
+      "status": "approved",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-06-30",
+      "injections_approved": 12,
+      "injections_used": 2,
+      "step_therapy_exception": false,
+      "requested_on": null
+     },
+     {
+      "id": "a2",
+      "patient_id": "pt-1",
+      "payer_id": "ma-summit",
+      "auth_number": "AUTH-2",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OD"
+      ],
+      "status": "approved",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-06-30",
+      "injections_approved": 12,
+      "injections_used": 2,
+      "step_therapy_exception": false,
+      "requested_on": null
+     }
+    ],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-05"
+   ],
+   "why": "Only harbor auth is for OS; the OD auth belongs to another payer than the active coverage and is ignored: CLR-05 request."
+  },
+  {
+   "id": "clr-step-two-prior-same-day-excluded",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-summit",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-summit",
+      "name": "Summit Medicare Advantage",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": {
+       "first_line": "bevacizumab",
+       "min_doses": 3
+      },
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-summit",
+      "auth_number": "AUTH-S",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OD"
+      ],
+      "status": "approved",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-06-30",
+      "injections_approved": 12,
+      "injections_used": 2,
+      "step_therapy_exception": false,
+      "requested_on": null
+     }
+    ],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "b1",
+      "patient_id": "pt-1",
+      "date": "2026-08-15",
+      "eye": "OD",
+      "drug": "bevacizumab",
+      "dose_mg": 1.25,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-b1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     },
+     {
+      "id": "b2",
+      "patient_id": "pt-1",
+      "date": "2026-09-15",
+      "eye": "OD",
+      "drug": "bevacizumab",
+      "dose_mg": 1.25,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-b2",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     },
+     {
+      "id": "b3",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "eye": "OS",
+      "drug": "bevacizumab",
+      "dose_mg": 1.25,
+      "admin_eye": "OS",
+      "medadmin_id": "ma-b3",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-10"
+   ],
+   "why": "Summit needs 3 prior bevacizumab; only 2 have date < dos (the OS one on 11-20 does not count): CLR-10."
+  },
+  {
+   "id": "clr-step-three-other-eye-counts",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-summit",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-summit",
+      "name": "Summit Medicare Advantage",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": {
+       "first_line": "bevacizumab",
+       "min_doses": 3
+      },
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-summit",
+      "auth_number": "AUTH-S",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OD"
+      ],
+      "status": "approved",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-06-30",
+      "injections_approved": 12,
+      "injections_used": 2,
+      "step_therapy_exception": false,
+      "requested_on": null
+     }
+    ],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "b1",
+      "patient_id": "pt-1",
+      "date": "2026-08-15",
+      "eye": "OD",
+      "drug": "bevacizumab",
+      "dose_mg": 1.25,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-b1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     },
+     {
+      "id": "b2",
+      "patient_id": "pt-1",
+      "date": "2026-09-15",
+      "eye": "OD",
+      "drug": "bevacizumab",
+      "dose_mg": 1.25,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-b2",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     },
+     {
+      "id": "b3",
+      "patient_id": "pt-1",
+      "date": "2026-09-20",
+      "eye": "OS",
+      "drug": "bevacizumab",
+      "dose_mg": 1.25,
+      "admin_eye": "OS",
+      "medadmin_id": "ma-b3",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "Two OD plus one OS prior bevacizumab = 3, any eye counts; auth valid."
+  },
+  {
+   "id": "clr-step-exception-on-file",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-summit",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-summit",
+      "name": "Summit Medicare Advantage",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": {
+       "first_line": "bevacizumab",
+       "min_doses": 3
+      },
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-summit",
+      "auth_number": "AUTH-S",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OD"
+      ],
+      "status": "approved",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-06-30",
+      "injections_approved": 12,
+      "injections_used": 2,
+      "step_therapy_exception": true,
+      "requested_on": null
+     }
+    ],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "b1",
+      "patient_id": "pt-1",
+      "date": "2026-09-15",
+      "eye": "OD",
+      "drug": "bevacizumab",
+      "dose_mg": 1.25,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-b1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "Only 1 prior bevacizumab, but the covering approved auth has step_therapy_exception=True."
+  },
+  {
+   "id": "clr-first-line-drug-needs-no-step",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-summit",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-summit",
+      "name": "Summit Medicare Advantage",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": {
+       "first_line": "bevacizumab",
+       "min_doses": 3
+      },
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "bevacizumab",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "b1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OD",
+      "drug": "bevacizumab",
+      "dose_mg": 1.25,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-b1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "bevacizumab"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "Bevacizumab is first line: no step therapy, and not in summit pa_required so no PA."
+  },
+  {
+   "id": "clr-bilateral-dx-on-single-eye-plan",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3231",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "H35.3231 covers OD and OS, so it covers the OD plan; medicare needs no PA."
+  },
+  {
+   "id": "clr-interval-exactly-28-days",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-23",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "Last OD 10-23 to dos 11-20 is 28 days, not < 28: CLR-03 passes."
+  },
+  {
+   "id": "clr-order-mismatch-no-plan-wrong-eye-dx",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     },
+     {
+      "id": "plan-OS",
+      "patient_id": "pt-1",
+      "eye": "OS",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "i1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-i1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     },
+     {
+      "id": "i2",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OS",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OS",
+      "medadmin_id": "ma-i2",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "faricimab"
+       },
+       {
+        "eye": "OS",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLR-02",
+    "CLR-11"
+   ],
+   "why": "OD line is faricimab but plan is aflibercept_2mg: CLR-02. OS plan carries right-eye dx H35.3211: CLR-11."
+  },
+  {
+   "id": "clr-coverage-ended-no-plan-unknown-dx",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": "2026-11-19"
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.9999",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "i1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-i1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       },
+       {
+        "eye": "OS",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLR-01",
+    "CLR-02",
+    "CLR-11"
+   ],
+   "why": "Coverage ended 11-19, dos 11-20: CLR-01. No OS plan: CLR-02. OD dx H35.9999 not in table: CLR-11."
+  },
+  {
+   "id": "clr-note-agrees",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [
+     {
+      "id": "n1",
+      "patient_id": "pt-1",
+      "date": "2026-11-10",
+      "author": "Dr. Test",
+      "text": "Plan: continue Eylea OD, q8w."
+     }
+    ],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "Note (11-10, after order 10-01) says Eylea OD q8w; plan aflibercept_2mg 8 weeks: CLR-12 passes."
+  },
+  {
+   "id": "clr-note-drug-disagrees",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [
+     {
+      "id": "n1",
+      "patient_id": "pt-1",
+      "date": "2026-11-10",
+      "author": "Dr. Test",
+      "text": "Switch OD to Vabysmo, q8w."
+     }
+    ],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLR-12"
+   ],
+   "why": "Newer note says Vabysmo OD, order is aflibercept_2mg: CLR-12 hold."
+  },
+  {
+   "id": "clr-note-interval-disagrees",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [
+     {
+      "id": "n1",
+      "patient_id": "pt-1",
+      "date": "2026-11-10",
+      "author": "Dr. Test",
+      "text": "Plan: continue Eylea OD, extend to 10 weeks."
+     }
+    ],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLR-12"
+   ],
+   "why": "Newer note says 10 weeks, order is 8: CLR-12 hold."
+  },
+  {
+   "id": "clr-note-older-than-order",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OD",
+      "patient_id": "pt-1",
+      "eye": "OD",
+      "diagnosis_code": "H35.3211",
+      "drug": "aflibercept_2mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OD",
+        "drug": "aflibercept_2mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [
+     {
+      "id": "n1",
+      "patient_id": "pt-1",
+      "date": "2026-09-20",
+      "author": "Dr. Test",
+      "text": "Switch OD to Vabysmo, q4w."
+     }
+    ],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "Note 09-20 predates order updated 10-01, so CLR-12 passes despite disagreement."
+  },
+  {
+   "id": "clr-note-eylea-hd-matches-hd-order",
+   "stage": "clearance",
+   "subject_id": "appt-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [
+     {
+      "id": "plan-OS",
+      "patient_id": "pt-1",
+      "eye": "OS",
+      "diagnosis_code": "H35.3221",
+      "drug": "aflibercept_8mg",
+      "interval_weeks": 8,
+      "physician": "Dr. Test",
+      "updated_on": "2026-10-01"
+     }
+    ],
+    "injections": [
+     {
+      "id": "i1",
+      "patient_id": "pt-1",
+      "date": "2026-09-30",
+      "eye": "OS",
+      "drug": "aflibercept_8mg",
+      "dose_mg": 8.0,
+      "admin_eye": "OS",
+      "medadmin_id": "ma-i1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [
+     {
+      "id": "appt-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-20",
+      "time": "09:00",
+      "kind": "injection",
+      "status": "booked",
+      "planned": [
+       {
+        "eye": "OS",
+        "drug": "aflibercept_8mg"
+       }
+      ],
+      "provider": "Dr. Test",
+      "location": "Main"
+     }
+    ],
+    "notes": [
+     {
+      "id": "n1",
+      "patient_id": "pt-1",
+      "date": "2026-11-10",
+      "author": "Dr. Test",
+      "text": "Plan: continue Eylea HD OS, q8w."
+     }
+    ],
+    "claims": [],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "Note 'Eylea HD' must read as aflibercept_8mg, matching the OS order and 8 weeks: no disagreement."
+  },
+  {
+   "id": "clm-clean-eylea-od-hyphen-ndc-no-auth-needed",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755-0005-02"
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "All lines agree; 5-4-2 NDC is valid; medicare needs no PA so absent auth number is fine."
+  },
+  {
+   "id": "clm-lt-on-od-and-vabysmo-6-units",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OD",
+      "drug": "faricimab",
+      "dose_mg": 6.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "LT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J2777",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 6,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755000502"
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-03",
+    "CLM-05"
+   ],
+   "why": "OD injection but 67028 carries LT (CLM-03); Vabysmo expects 60 units, billed 6 (CLM-05)."
+  },
+  {
+   "id": "clm-eylea-hd-billed-with-eylea-code",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OD",
+      "drug": "aflibercept_8mg",
+      "dose_mg": 8.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 8,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755000502"
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-04"
+   ],
+   "why": "Eylea HD expects J0177; line is J0178 (CLM-04). Units 8 match expected 8."
+  },
+  {
+   "id": "clm-eylea-hd-2-units",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OD",
+      "drug": "aflibercept_8mg",
+      "dose_mg": 8.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0177",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755000502"
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-05"
+   ],
+   "why": "J0177 correct but units 2 vs expected 8: CLM-05."
+  },
+  {
+   "id": "clm-bevacizumab-j7999-under-c9257-payer",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-harbor",
+      "name": "Harbor Advantage HMO",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "C9257",
+      "bevacizumab_units": 5
+     },
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OD",
+      "drug": "bevacizumab",
+      "dose_mg": 1.25,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J7999",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 1,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755000502"
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-04",
+    "CLM-05"
+   ],
+   "why": "Harbor expects C9257 x5; line is J7999 x1. J7999 is a known drug code (medicare policy in dataset) so CLM-04 and CLM-05 (1 vs 5)."
+  },
+  {
+   "id": "clm-bevacizumab-c9257-x5-correct",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-harbor",
+      "name": "Harbor Advantage HMO",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "C9257",
+      "bevacizumab_units": 5
+     },
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OD",
+      "drug": "bevacizumab",
+      "dose_mg": 1.25,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "C9257",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 5,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755000502"
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "C9257 x5 is exactly what harbor expects; bevacizumab not in harbor pa_required."
+  },
+  {
+   "id": "clm-jz-missing-and-em-without-25",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755000502"
+       },
+       {
+        "seq": 3,
+        "code": "99213",
+        "modifiers": [],
+        "units": 1,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": null
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-06",
+    "CLM-10"
+   ],
+   "why": "Drug line has neither JZ nor JW (CLM-06); 99213 lacks modifier 25 with a 67028 on the claim (CLM-10)."
+  },
+  {
+   "id": "clm-jz-and-jw-both-and-10-digit-ndc",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ",
+         "JW"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "6175500050"
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-06",
+    "CLM-07"
+   ],
+   "why": "Both JZ and JW is not exactly one (CLM-06); NDC has 10 digits (CLM-07)."
+  },
+  {
+   "id": "clm-procedure-and-medadmin-eye-disagree",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OS",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755000502"
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLM-01"
+   ],
+   "why": "Procedure site OD vs MedicationAdministration site OS: CLM-01 hold; per-injection rules skipped."
+  },
+  {
+   "id": "clm-67028-with-no-injection-record",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-11",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755000502"
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLM-02"
+   ],
+   "why": "Claim dos 11-12 has a 67028 line but the only injection is 11-11: CLM-02 hold, nothing else emitted."
+  },
+  {
+   "id": "clm-auth-number-missing-when-required",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-harbor",
+      "name": "Harbor Advantage HMO",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "C9257",
+      "bevacizumab_units": 5
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "auth_number": "AUTH-1",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OD"
+      ],
+      "status": "approved",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-06-30",
+      "injections_approved": 12,
+      "injections_used": 2,
+      "step_therapy_exception": false,
+      "requested_on": null
+     }
+    ],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755000502"
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-09"
+   ],
+   "why": "Harbor requires PA for Eylea; approved AUTH-1 covers dos but claim.auth_number is empty: CLM-09 fix_claim to AUTH-1."
+  },
+  {
+   "id": "clm-bilateral-same-day-rt-lt-with-em-25",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     },
+     {
+      "id": "inj-2",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OS",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OS",
+      "medadmin_id": "ma-inj-2",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "RT",
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755000502"
+       },
+       {
+        "seq": 3,
+        "code": "67028",
+        "modifiers": [
+         "LT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3221"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 4,
+        "code": "J0178",
+        "modifiers": [
+         "LT",
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755-0005-02"
+       },
+       {
+        "seq": 5,
+        "code": "99213",
+        "modifiers": [
+         "25"
+        ],
+        "units": 1,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": null
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "Two injections matched to RT and LT lines with right dx, each drug line has JZ, E/M carries 25."
+  },
+  {
+   "id": "clm-eylea-hd-with-matching-auth",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-harbor",
+      "name": "Harbor Advantage HMO",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "C9257",
+      "bevacizumab_units": 5
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "auth_number": "AUTH-2",
+      "drug": "aflibercept_8mg",
+      "eyes": [
+       "OD"
+      ],
+      "status": "approved",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-06-30",
+      "injections_approved": 12,
+      "injections_used": 2,
+      "step_therapy_exception": false,
+      "requested_on": null
+     }
+    ],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OD",
+      "drug": "aflibercept_8mg",
+      "dose_mg": 8.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": "AUTH-2",
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0177",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 8,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755000502"
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "J0177 x8, JZ, valid NDC, dx covers OD, claim carries the covering auth number AUTH-2."
+  },
+  {
+   "id": "clm-vabysmo-60-units-with-matching-auth",
+   "stage": "claim",
+   "subject_id": "clm-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "com-northfield",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "com-northfield",
+      "name": "Northfield Commercial PPO",
+      "kind": "commercial",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_8mg",
+       "faricimab"
+      ],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J3590",
+      "bevacizumab_units": 1,
+      "timely_filing_days": 180
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "com-northfield",
+      "auth_number": "AUTH-3",
+      "drug": "faricimab",
+      "eyes": [
+       "OD"
+      ],
+      "status": "approved",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-06-30",
+      "injections_approved": 12,
+      "injections_used": 2,
+      "step_therapy_exception": false,
+      "requested_on": null
+     }
+    ],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-11-12",
+      "eye": "OD",
+      "drug": "faricimab",
+      "dose_mg": 6.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "com-northfield",
+      "dos": "2026-11-12",
+      "status": "draft",
+      "auth_number": "AUTH-3",
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J2777",
+        "modifiers": [
+         "JW"
+        ],
+        "units": 60,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755000502"
+       }
+      ]
+     }
+    ],
+    "denials": [],
+    "flags": []
+   },
+   "expect_status": "clear",
+   "expect_rules": [],
+   "why": "J2777 x60 with JW (exactly one waste modifier), valid NDC, correct auth number."
+  },
+  {
+   "id": "den-197-auth-on-file-missing-from-claim",
+   "stage": "denial",
+   "subject_id": "den-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-harbor",
+      "name": "Harbor Advantage HMO",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "C9257",
+      "bevacizumab_units": 5
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "auth_number": "AUTH-100",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OD"
+      ],
+      "status": "approved",
+      "valid_from": "2026-06-01",
+      "valid_to": "2027-05-31",
+      "injections_approved": 12,
+      "injections_used": 2,
+      "step_therapy_exception": false,
+      "requested_on": null
+     }
+    ],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-20",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "dos": "2026-10-20",
+      "status": "denied",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755-0005-02"
+       }
+      ]
+     }
+    ],
+    "denials": [
+     {
+      "id": "den-1",
+      "claim_id": "clm-1",
+      "date": "2026-11-10",
+      "group": "CO",
+      "carc": "197",
+      "amount": 100.0
+     }
+    ],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-02"
+   ],
+   "why": "Approved AUTH-100 matches the 10-20 OD Eylea injection; claim auth_number empty: corrected claim."
+  },
+  {
+   "id": "den-197-number-already-on-claim",
+   "stage": "denial",
+   "subject_id": "den-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-harbor",
+      "name": "Harbor Advantage HMO",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "C9257",
+      "bevacizumab_units": 5
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "auth_number": "AUTH-100",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OD"
+      ],
+      "status": "approved",
+      "valid_from": "2026-06-01",
+      "valid_to": "2027-05-31",
+      "injections_approved": 12,
+      "injections_used": 2,
+      "step_therapy_exception": false,
+      "requested_on": null
+     }
+    ],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-20",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "dos": "2026-10-20",
+      "status": "denied",
+      "auth_number": "AUTH-100",
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755-0005-02"
+       }
+      ]
+     }
+    ],
+    "denials": [
+     {
+      "id": "den-1",
+      "claim_id": "clm-1",
+      "date": "2026-11-10",
+      "group": "CO",
+      "carc": "197",
+      "amount": 100.0
+     }
+    ],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-03"
+   ],
+   "why": "Valid auth exists and claim already carries AUTH-100: appeal."
+  },
+  {
+   "id": "den-197-no-matching-auth",
+   "stage": "denial",
+   "subject_id": "den-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "ma-harbor",
+      "name": "Harbor Advantage HMO",
+      "kind": "medicare_advantage",
+      "version": "2026.2",
+      "pa_required": [
+       "aflibercept_2mg",
+       "aflibercept_8mg",
+       "faricimab",
+       "ranibizumab"
+      ],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "C9257",
+      "bevacizumab_units": 5
+     }
+    ],
+    "prior_auths": [
+     {
+      "id": "a1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "auth_number": "AUTH-100",
+      "drug": "aflibercept_2mg",
+      "eyes": [
+       "OS"
+      ],
+      "status": "approved",
+      "valid_from": "2026-01-01",
+      "valid_to": "2027-06-30",
+      "injections_approved": 12,
+      "injections_used": 2,
+      "step_therapy_exception": false,
+      "requested_on": null
+     }
+    ],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-20",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "ma-harbor",
+      "dos": "2026-10-20",
+      "status": "denied",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755-0005-02"
+       }
+      ]
+     }
+    ],
+    "denials": [
+     {
+      "id": "den-1",
+      "claim_id": "clm-1",
+      "date": "2026-11-10",
+      "group": "CO",
+      "carc": "197",
+      "amount": 100.0
+     }
+    ],
+    "flags": []
+   },
+   "expect_status": "hold",
+   "expect_rules": [
+    "DEN-04"
+   ],
+   "why": "Only auth is for OS; no auth matches the OD injection: hold."
+  },
+  {
+   "id": "den-4-claim-has-fixable-eye-modifier",
+   "stage": "denial",
+   "subject_id": "den-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-20",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-10-20",
+      "status": "denied",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "LT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755-0005-02"
+       }
+      ]
+     }
+    ],
+    "denials": [
+     {
+      "id": "den-1",
+      "claim_id": "clm-1",
+      "date": "2026-11-10",
+      "group": "CO",
+      "carc": "4",
+      "amount": 100.0
+     }
+    ],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-05"
+   ],
+   "why": "check_claim finds 67028 with LT on an OD injection (ACTION, no HOLD): corrected claim."
+  },
+  {
+   "id": "den-16-claim-agrees-with-chart",
+   "stage": "denial",
+   "subject_id": "den-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-20",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-10-20",
+      "status": "denied",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755-0005-02"
+       }
+      ]
+     }
+    ],
+    "denials": [
+     {
+      "id": "den-1",
+      "claim_id": "clm-1",
+      "date": "2026-11-10",
+      "group": "CO",
+      "carc": "16",
+      "amount": 100.0
+     }
+    ],
+    "flags": []
+   },
+   "expect_status": "hold",
+   "expect_rules": [
+    "DEN-06"
+   ],
+   "why": "Claim is clean against the chart; nothing to correct, a person must decide."
+  },
+  {
+   "id": "den-151-gap-27-days-denial-correct",
+   "stage": "denial",
+   "subject_id": "den-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-0",
+      "patient_id": "pt-1",
+      "date": "2026-09-23",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-0",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     },
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-20",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-10-20",
+      "status": "denied",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755-0005-02"
+       }
+      ]
+     }
+    ],
+    "denials": [
+     {
+      "id": "den-1",
+      "claim_id": "clm-1",
+      "date": "2026-11-10",
+      "group": "CO",
+      "carc": "151",
+      "amount": 100.0
+     }
+    ],
+    "flags": []
+   },
+   "expect_status": "hold",
+   "expect_rules": [
+    "DEN-07"
+   ],
+   "why": "Previous OD injection 09-23 to 10-20 is 27 days < 28: denial looks correct."
+  },
+  {
+   "id": "den-151-gap-28-days-appeal",
+   "stage": "denial",
+   "subject_id": "den-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-0",
+      "patient_id": "pt-1",
+      "date": "2026-09-22",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-0",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     },
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-20",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-10-20",
+      "status": "denied",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755-0005-02"
+       }
+      ]
+     }
+    ],
+    "denials": [
+     {
+      "id": "den-1",
+      "claim_id": "clm-1",
+      "date": "2026-11-10",
+      "group": "CO",
+      "carc": "151",
+      "amount": 100.0
+     }
+    ],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-08"
+   ],
+   "why": "09-22 to 10-20 is 28 days, not < 28: appeal."
+  },
+  {
+   "id": "den-50-medical-necessity",
+   "stage": "denial",
+   "subject_id": "den-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-20",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-10-20",
+      "status": "denied",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755-0005-02"
+       }
+      ]
+     }
+    ],
+    "denials": [
+     {
+      "id": "den-1",
+      "claim_id": "clm-1",
+      "date": "2026-11-10",
+      "group": "CO",
+      "carc": "50",
+      "amount": 100.0
+     }
+    ],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-09"
+   ],
+   "why": "CARC 50 always appeal."
+  },
+  {
+   "id": "den-27-coverage-active-on-dos",
+   "stage": "denial",
+   "subject_id": "den-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-20",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-10-20",
+      "status": "denied",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755-0005-02"
+       }
+      ]
+     }
+    ],
+    "denials": [
+     {
+      "id": "den-1",
+      "claim_id": "clm-1",
+      "date": "2026-11-10",
+      "group": "CO",
+      "carc": "27",
+      "amount": 100.0
+     }
+    ],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-10"
+   ],
+   "why": "Coverage for the claim's payer is active on 10-20: payer is wrong, appeal."
+  },
+  {
+   "id": "den-27-coverage-ended-day-before",
+   "stage": "denial",
+   "subject_id": "den-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": "2026-10-19"
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-20",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-10-20",
+      "status": "denied",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755-0005-02"
+       }
+      ]
+     }
+    ],
+    "denials": [
+     {
+      "id": "den-1",
+      "claim_id": "clm-1",
+      "date": "2026-11-10",
+      "group": "CO",
+      "carc": "27",
+      "amount": 100.0
+     }
+    ],
+    "flags": []
+   },
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-11"
+   ],
+   "why": "Coverage ended 10-19, dos 10-20: verify eligibility."
+  },
+  {
+   "id": "den-unknown-code-96",
+   "stage": "denial",
+   "subject_id": "den-1",
+   "dataset": {
+    "as_of": "2026-11-18",
+    "practice": "Test Practice",
+    "patients": [
+     {
+      "id": "pt-1",
+      "token": "PT-1",
+      "name": "Test Patient",
+      "birth_date": "1950-01-01",
+      "phone": "555-0100"
+     }
+    ],
+    "coverages": [
+     {
+      "id": "cov-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "plan_name": "Test plan",
+      "member_id": "M000001",
+      "period_start": "2025-01-01",
+      "period_end": null
+     }
+    ],
+    "policies": [
+     {
+      "payer_id": "medicare-ffs",
+      "name": "Medicare Part B (illustrative)",
+      "kind": "medicare_ffs",
+      "version": "2026.2",
+      "pa_required": [],
+      "step_therapy": null,
+      "bevacizumab_hcpcs": "J7999",
+      "bevacizumab_units": 1
+     }
+    ],
+    "prior_auths": [],
+    "plans": [],
+    "injections": [
+     {
+      "id": "inj-1",
+      "patient_id": "pt-1",
+      "date": "2026-10-20",
+      "eye": "OD",
+      "drug": "aflibercept_2mg",
+      "dose_mg": 2.0,
+      "admin_eye": "OD",
+      "medadmin_id": "ma-inj-1",
+      "appointment_id": null,
+      "ndc": "61755000502"
+     }
+    ],
+    "appointments": [],
+    "notes": [],
+    "claims": [
+     {
+      "id": "clm-1",
+      "patient_id": "pt-1",
+      "payer_id": "medicare-ffs",
+      "dos": "2026-10-20",
+      "status": "denied",
+      "auth_number": null,
+      "lines": [
+       {
+        "seq": 1,
+        "code": "67028",
+        "modifiers": [
+         "RT"
+        ],
+        "units": 1,
+        "dx_codes": [
+         "H35.3211"
+        ],
+        "charge": 0.0,
+        "ndc": null
+       },
+       {
+        "seq": 2,
+        "code": "J0178",
+        "modifiers": [
+         "JZ"
+        ],
+        "units": 2,
+        "dx_codes": [],
+        "charge": 0.0,
+        "ndc": "61755-0005-02"
+       }
+      ]
+     }
+    ],
+    "denials": [
+     {
+      "id": "den-1",
+      "claim_id": "clm-1",
+      "date": "2026-11-10",
+      "group": "CO",
+      "carc": "96",
+      "amount": 100.0
+     }
+    ],
+    "flags": []
+   },
+   "expect_status": "hold",
+   "expect_rules": [
+    "DEN-12"
+   ],
+   "why": "CARC 96 is not handled: hold."
+  }
+ ]
+}

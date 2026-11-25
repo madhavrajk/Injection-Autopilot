@@ -1,0 +1,74 @@
+[
+ {
+  "payer_id": "medicare-ffs",
+  "name": "Medicare Part B (illustrative)",
+  "kind": "medicare_ffs",
+  "version": "2026.2",
+  "pa_required": [],
+  "step_therapy": null,
+  "min_interval_days": 28,
+  "pa_turnaround_days": 7,
+  "bevacizumab_hcpcs": "J7999",
+  "bevacizumab_units": 1,
+  "timely_filing_days": 365,
+  "appeal_days": 120
+ },
+ {
+  "payer_id": "ma-summit",
+  "name": "Summit Medicare Advantage",
+  "kind": "medicare_advantage",
+  "version": "2026.2",
+  "pa_required": [
+   "aflibercept_2mg",
+   "aflibercept_8mg",
+   "faricimab",
+   "ranibizumab"
+  ],
+  "step_therapy": {
+   "first_line": "bevacizumab",
+   "min_doses": 3
+  },
+  "min_interval_days": 28,
+  "pa_turnaround_days": 7,
+  "bevacizumab_hcpcs": "J7999",
+  "bevacizumab_units": 1,
+  "timely_filing_days": 365,
+  "appeal_days": 60
+ },
+ {
+  "payer_id": "ma-harbor",
+  "name": "Harbor Advantage HMO",
+  "kind": "medicare_advantage",
+  "version": "2026.2",
+  "pa_required": [
+   "aflibercept_2mg",
+   "aflibercept_8mg",
+   "faricimab",
+   "ranibizumab"
+  ],
+  "step_therapy": null,
+  "min_interval_days": 28,
+  "pa_turnaround_days": 7,
+  "bevacizumab_hcpcs": "C9257",
+  "bevacizumab_units": 5,
+  "timely_filing_days": 365,
+  "appeal_days": 60
+ },
+ {
+  "payer_id": "com-northfield",
+  "name": "Northfield Commercial PPO",
+  "kind": "commercial",
+  "version": "2026.2",
+  "pa_required": [
+   "aflibercept_8mg",
+   "faricimab"
+  ],
+  "step_therapy": null,
+  "min_interval_days": 28,
+  "pa_turnaround_days": 7,
+  "bevacizumab_hcpcs": "J3590",
+  "bevacizumab_units": 1,
+  "timely_filing_days": 180,
+  "appeal_days": 180
+ }
+]

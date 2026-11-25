@@ -1,0 +1,765 @@
+{
+ "as_of": "2026-11-18",
+ "seed": 7,
+ "practice": "Garden State Retina (synthetic)",
+ "counts": {
+  "patients": 141,
+  "plans": 156,
+  "injections": 546,
+  "appointments": 630,
+  "clearance_appointments": 55,
+  "claims": 308,
+  "draft_claims": 58,
+  "denials": 18,
+  "planted": 71,
+  "near_misses": 23,
+  "planted_by_stage": {
+   "cadence": 15,
+   "clearance": 21,
+   "claim": 17,
+   "denial": 18
+  }
+ },
+ "planted": [
+  {
+   "item_id": "cadence:plan-0013",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-02"
+   ],
+   "why": "Due exactly 14 days ago, nothing booked: overdue but not yet lapsed"
+  },
+  {
+   "item_id": "cadence:plan-0018",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-04"
+   ],
+   "why": "Booked 20 days after the due date"
+  },
+  {
+   "item_id": "cadence:plan-0021",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-03"
+   ],
+   "why": "Booked 21 days after the last injection, under the 28 day minimum"
+  },
+  {
+   "item_id": "cadence:plan-0024",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-04"
+   ],
+   "why": "Booked 10 days after the due date"
+  },
+  {
+   "item_id": "cadence:plan-0054",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-05"
+   ],
+   "why": "Due 20 days ago, nothing booked (no-show on the due date)"
+  },
+  {
+   "item_id": "cadence:plan-0069",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-03"
+   ],
+   "why": "Booked 21 days after the last injection, under the 28 day minimum"
+  },
+  {
+   "item_id": "cadence:plan-0072",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-05"
+   ],
+   "why": "Due 35 days ago, nothing booked (no-show on the due date)"
+  },
+  {
+   "item_id": "cadence:plan-0074",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-03"
+   ],
+   "why": "Booked 21 days after the last injection (visit outside the clearance window)"
+  },
+  {
+   "item_id": "cadence:plan-0088",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-02"
+   ],
+   "why": "Due exactly 14 days out, nothing booked: inside the booking horizon"
+  },
+  {
+   "item_id": "cadence:plan-0110",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-02"
+   ],
+   "why": "Due in 6 days, nothing booked"
+  },
+  {
+   "item_id": "cadence:plan-0117",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-05"
+   ],
+   "why": "Both eyes due 70 days ago, nothing booked"
+  },
+  {
+   "item_id": "cadence:plan-0118",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-05"
+   ],
+   "why": "Both eyes due 70 days ago, nothing booked"
+  },
+  {
+   "item_id": "cadence:plan-0121",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-03"
+   ],
+   "why": "Booked 21 days after the last injection, under the 28 day minimum"
+  },
+  {
+   "item_id": "cadence:plan-0141",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-04"
+   ],
+   "why": "Appointment is 11 days after the due date, more than 7 days late"
+  },
+  {
+   "item_id": "cadence:plan-0155",
+   "stage": "cadence",
+   "expect_status": "action",
+   "expect_rules": [
+    "CAD-02"
+   ],
+   "why": "Due 5 days ago, only a cancelled appointment"
+  },
+  {
+   "item_id": "claim:clm-0021",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-05"
+   ],
+   "why": "Vabysmo billed 6 units, expected 60"
+  },
+  {
+   "item_id": "claim:clm-0025",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-06",
+    "CLM-10"
+   ],
+   "why": "Both JZ and JW, and 92014 without modifier 25"
+  },
+  {
+   "item_id": "claim:clm-0036",
+   "stage": "claim",
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLM-02"
+   ],
+   "why": "Injection billed for a visit that was an exam only; no injection on record"
+  },
+  {
+   "item_id": "claim:clm-0056",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-06"
+   ],
+   "why": "Drug line has no JZ or JW modifier"
+  },
+  {
+   "item_id": "claim:clm-0066",
+   "stage": "claim",
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLM-01"
+   ],
+   "why": "Procedure site is OD, MedicationAdministration site is OS"
+  },
+  {
+   "item_id": "claim:clm-0092",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-04",
+    "CLM-05"
+   ],
+   "why": "Harbor bevacizumab billed J7999 x1 instead of C9257 x5"
+  },
+  {
+   "item_id": "claim:clm-0103",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-09"
+   ],
+   "why": "Claim authorization number differs from the approved one"
+  },
+  {
+   "item_id": "claim:clm-0109",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-09"
+   ],
+   "why": "Claim carries no authorization number"
+  },
+  {
+   "item_id": "claim:clm-0121",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-04"
+   ],
+   "why": "Eylea 2 mg visit billed with J0177 (Eylea HD)"
+  },
+  {
+   "item_id": "claim:clm-0138",
+   "stage": "claim",
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLM-09"
+   ],
+   "why": "Authorization required and none covers the date of service"
+  },
+  {
+   "item_id": "claim:clm-0163",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-03"
+   ],
+   "why": "OD injection billed with the LT modifier"
+  },
+  {
+   "item_id": "claim:clm-0166",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-10"
+   ],
+   "why": "Same-day exam billed without modifier 25"
+  },
+  {
+   "item_id": "claim:clm-0173",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-03",
+    "CLM-07"
+   ],
+   "why": "Wrong eye modifier and a 10 digit NDC"
+  },
+  {
+   "item_id": "claim:clm-0199",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-03"
+   ],
+   "why": "OD injection line has no eye modifier"
+  },
+  {
+   "item_id": "claim:clm-0226",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-07"
+   ],
+   "why": "Drug line has no NDC"
+  },
+  {
+   "item_id": "claim:clm-0238",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-04"
+   ],
+   "why": "No drug line on a claim with an injection"
+  },
+  {
+   "item_id": "claim:clm-0291",
+   "stage": "claim",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLM-08"
+   ],
+   "why": "Injection line carries a left-eye diagnosis for an OD injection"
+  },
+  {
+   "item_id": "clearance:appt-0016",
+   "stage": "clearance",
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLR-11",
+    "CLR-12"
+   ],
+   "why": "Diagnosis code is not in the table and the note says Vabysmo while the order is Eylea"
+  },
+  {
+   "item_id": "clearance:appt-0083",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-01",
+    "CLR-03"
+   ],
+   "why": "Coverage ended before the visit and the booked date is 21 days after the last injection (28 days used with no coverage)"
+  },
+  {
+   "item_id": "clearance:appt-0113",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-01"
+   ],
+   "why": "Coverage starts after the visit date: no eligibility on the day"
+  },
+  {
+   "item_id": "clearance:appt-0145",
+   "stage": "clearance",
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLR-12"
+   ],
+   "why": "Note extends to 10 weeks, order is every 8 weeks"
+  },
+  {
+   "item_id": "clearance:appt-0150",
+   "stage": "clearance",
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLR-02"
+   ],
+   "why": "Appointment plans Vabysmo but the order is Eylea"
+  },
+  {
+   "item_id": "clearance:appt-0204",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-05"
+   ],
+   "why": "Bilateral visit; authorization covers OD only, OS line has none"
+  },
+  {
+   "item_id": "clearance:appt-0232",
+   "stage": "clearance",
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLR-02"
+   ],
+   "why": "Appointment plans OS but only OD has a treatment plan"
+  },
+  {
+   "item_id": "clearance:appt-0279",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-03"
+   ],
+   "why": "Booked 21 days after the last injection, minimum is 28"
+  },
+  {
+   "item_id": "clearance:appt-0315",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-06",
+    "CLR-10"
+   ],
+   "why": "Authorization expired before the visit and only 1 bevacizumab injection on file for step therapy"
+  },
+  {
+   "item_id": "clearance:appt-0426",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-08"
+   ],
+   "why": "Authorization pending; requested 12 days ago, decision due before the visit"
+  },
+  {
+   "item_id": "clearance:appt-0476",
+   "stage": "clearance",
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLR-11"
+   ],
+   "why": "Plan diagnosis code E11.9 is not in the table"
+  },
+  {
+   "item_id": "clearance:appt-0484",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-03",
+    "CLR-04"
+   ],
+   "why": "Booked 21 days after the last injection and no authorization on file for a drug that needs one"
+  },
+  {
+   "item_id": "clearance:appt-0493",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-04"
+   ],
+   "why": "Payer requires authorization for Eylea and none exists"
+  },
+  {
+   "item_id": "clearance:appt-0534",
+   "stage": "clearance",
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLR-11"
+   ],
+   "why": "Plan diagnosis is a left-eye code but the eye is OD"
+  },
+  {
+   "item_id": "clearance:appt-0548",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-05"
+   ],
+   "why": "Approved authorization covers OD only; visit is OS"
+  },
+  {
+   "item_id": "clearance:appt-0561",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-07"
+   ],
+   "why": "Authorization has no injections left"
+  },
+  {
+   "item_id": "clearance:appt-0570",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-05"
+   ],
+   "why": "Approved authorization is for Vabysmo; visit is Eylea"
+  },
+  {
+   "item_id": "clearance:appt-0588",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-06"
+   ],
+   "why": "Authorization window ended 4 days before the visit"
+  },
+  {
+   "item_id": "clearance:appt-0602",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-10"
+   ],
+   "why": "Step therapy not met: 2 bevacizumab injections, no exception"
+  },
+  {
+   "item_id": "clearance:appt-0614",
+   "stage": "clearance",
+   "expect_status": "hold",
+   "expect_rules": [
+    "CLR-12"
+   ],
+   "why": "Note switches OD to Vabysmo, order is Eylea"
+  },
+  {
+   "item_id": "clearance:appt-0618",
+   "stage": "clearance",
+   "expect_status": "action",
+   "expect_rules": [
+    "CLR-08"
+   ],
+   "why": "Authorization still pending; requested 2 days ago"
+  },
+  {
+   "item_id": "denial:den-0001",
+   "stage": "denial",
+   "expect_status": "hold",
+   "expect_rules": [
+    "DEN-06"
+   ],
+   "why": "Modifier denial but the claim looks right"
+  },
+  {
+   "item_id": "denial:den-0002",
+   "stage": "denial",
+   "expect_status": "hold",
+   "expect_rules": [
+    "DEN-06"
+   ],
+   "why": "Chart sources disagree on the eye"
+  },
+  {
+   "item_id": "denial:den-0003",
+   "stage": "denial",
+   "expect_status": "hold",
+   "expect_rules": [
+    "DEN-07"
+   ],
+   "why": "Frequency denial and the previous OD injection was 21 days earlier"
+  },
+  {
+   "item_id": "denial:den-0004",
+   "stage": "denial",
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-11"
+   ],
+   "why": "Claim payer's coverage had ended before the date of service"
+  },
+  {
+   "item_id": "denial:den-0005",
+   "stage": "denial",
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-05"
+   ],
+   "why": "Missing NDC on the drug line"
+  },
+  {
+   "item_id": "denial:den-0006",
+   "stage": "denial",
+   "expect_status": "hold",
+   "expect_rules": [
+    "DEN-12"
+   ],
+   "why": "Timely filing denial: code not handled by the triage"
+  },
+  {
+   "item_id": "denial:den-0007",
+   "stage": "denial",
+   "expect_status": "hold",
+   "expect_rules": [
+    "DEN-12"
+   ],
+   "why": "Unlisted denial code"
+  },
+  {
+   "item_id": "denial:den-0008",
+   "stage": "denial",
+   "expect_status": "hold",
+   "expect_rules": [
+    "DEN-00"
+   ],
+   "why": "Denial refers to a claim that is not in the data"
+  },
+  {
+   "item_id": "denial:den-0009",
+   "stage": "denial",
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-08"
+   ],
+   "why": "Frequency denial but the previous injection was 8 weeks earlier"
+  },
+  {
+   "item_id": "denial:den-0010",
+   "stage": "denial",
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-09"
+   ],
+   "why": "Medical necessity denial"
+  },
+  {
+   "item_id": "denial:den-0011",
+   "stage": "denial",
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-02"
+   ],
+   "why": "Authorization exists; claim has no number"
+  },
+  {
+   "item_id": "denial:den-0012",
+   "stage": "denial",
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-03"
+   ],
+   "why": "Claim already carries the approved authorization number"
+  },
+  {
+   "item_id": "denial:den-0013",
+   "stage": "denial",
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-05"
+   ],
+   "why": "Modifier problem found on the claim itself"
+  },
+  {
+   "item_id": "denial:den-0014",
+   "stage": "denial",
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-05"
+   ],
+   "why": "Diagnosis does not match the eye"
+  },
+  {
+   "item_id": "denial:den-0015",
+   "stage": "denial",
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-09"
+   ],
+   "why": "Medical necessity denial"
+  },
+  {
+   "item_id": "denial:den-0016",
+   "stage": "denial",
+   "expect_status": "hold",
+   "expect_rules": [
+    "DEN-04"
+   ],
+   "why": "No authorization on file for this date and eye"
+  },
+  {
+   "item_id": "denial:den-0017",
+   "stage": "denial",
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-02"
+   ],
+   "why": "Authorization exists; claim carries a different number"
+  },
+  {
+   "item_id": "denial:den-0018",
+   "stage": "denial",
+   "expect_status": "action",
+   "expect_rules": [
+    "DEN-10"
+   ],
+   "why": "Coverage was active on the date of service"
+  }
+ ],
+ "near_misses": [
+  {
+   "item_id": "cadence:plan-0001",
+   "why": "Plan with no completed injection yet: no completed injection, note only"
+  },
+  {
+   "item_id": "cadence:plan-0058",
+   "why": "Due in 15 days with nothing booked: outside the 14 day horizon"
+  },
+  {
+   "item_id": "cadence:plan-0106",
+   "why": "Booked exactly 28 days after the last injection: no CAD-03, early is fine"
+  },
+  {
+   "item_id": "cadence:plan-0151",
+   "why": "Booked exactly due + 7 days is on time"
+  },
+  {
+   "item_id": "claim:clm-0020",
+   "why": "Harbor bevacizumab billed C9257 x5"
+  },
+  {
+   "item_id": "claim:clm-0070",
+   "why": "Northfield bevacizumab billed J3590 x1"
+  },
+  {
+   "item_id": "claim:clm-0099",
+   "why": "NDC in the 5-4-2 dashed format is valid"
+  },
+  {
+   "item_id": "claim:clm-0105",
+   "why": "Bilateral diagnosis code on a single-eye injection covers the eye"
+  },
+  {
+   "item_id": "claim:clm-0111",
+   "why": "Bilateral same-day visit with RT and LT lines"
+  },
+  {
+   "item_id": "claim:clm-0147",
+   "why": "Authorization ending on the date of service still covers it"
+  },
+  {
+   "item_id": "claim:clm-0180",
+   "why": "E/M with modifier 25 and a 92134 OCT line are fine"
+  },
+  {
+   "item_id": "clearance:appt-0001",
+   "why": "First injection in this eye is allowed (no prior injection)"
+  },
+  {
+   "item_id": "clearance:appt-0024",
+   "why": "Note (drug) predates a newer order; the order is newer so it is not compared"
+  },
+  {
+   "item_id": "clearance:appt-0179",
+   "why": "Bilateral same-day visit with two planned lines is clear"
+  },
+  {
+   "item_id": "clearance:appt-0252",
+   "why": "Authorization ending on the visit date still covers it (note only)"
+  },
+  {
+   "item_id": "clearance:appt-0270",
+   "why": "Step therapy met by the exception on the authorization"
+  },
+  {
+   "item_id": "clearance:appt-0330",
+   "why": "Step therapy met by exactly 3 bevacizumab injections, no exception"
+  },
+  {
+   "item_id": "clearance:appt-0374",
+   "why": "Note says Eylea HD for an Eylea HD order: must not be read as Eylea"
+  },
+  {
+   "item_id": "clearance:appt-0431",
+   "why": "Interval exactly 28 days is allowed"
+  },
+  {
+   "item_id": "clearance:appt-0530",
+   "why": "Note (interval) predates a newer order; the order is newer so it is not compared"
+  },
+  {
+   "item_id": "clearance:appt-0566",
+   "why": "Late appointment is a cadence problem only; the clearance checks all pass"
+  },
+  {
+   "item_id": "clearance:appt-0584",
+   "why": "This visit uses the last authorized injection (note only)"
+  },
+  {
+   "item_id": "clearance:appt-0610",
+   "why": "Visit 63 days after last injection, due +7 is on time"
+  }
+ ]
+}
